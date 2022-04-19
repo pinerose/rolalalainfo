@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>rolalala</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <script async src="script.js"></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <nav id="characters">
+                <li onclick="choose_char(character[0]);">warrior</li>
+                <li onclick="choose_char(character[1]);">knight</li>
+                <li onclick="choose_char(character[2]);">lancer</li>
+                <li onclick="choose_char(character[3]);">paladin</li>
+                <li onclick="choose_char(character[4]);">arcknight</li>
+                <li onclick="choose_char(character[5]);">reaper</li>
+                <li onclick="choose_char(character[6]);">berserker</li>
+            </nav>
+            <div id="skill_icons">
+                <!--first line-->
+                <img class="hide" onclick="skill_desc(skill_tree[0]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[1]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[2]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[3]);" src=""></img>
+                <!--second line-->
+                <img class="hide" onclick="skill_desc(skill_tree[4]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[5]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[6]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[7]);" src=""></img>
+                <!--third line-->
+                <img class="hide" onclick="skill_desc(skill_tree[8]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[9]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[10]);" src=""></img>
+                <img class="hide" onclick="skill_desc(skill_tree[11]);" src=""></img>
+            </div>
+            <div id="skill_description">
+                <h2></h2>
+                <span></span>
+            </div>
+        </div>
+    </body>
+</html>
