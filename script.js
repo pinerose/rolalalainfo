@@ -15,7 +15,7 @@ function set_tree() {
     switch (present_char){
         case character[0]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[0] + skill_tree[i] + ".jpg";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[0] + "/" + skill_tree[i] + ".jpg";
                 document.querySelectorAll('#skill_icons img')[i].id = character[0] + skill_tree[i];
             }
             skill_name = ["횡베기", '타오르는 투지', '약점 노리기', '가드 브레이크', '카운터 디펜스', '침착한 대응', '전력 방어', '데들리 스트라이크', '전투 회복', '악식', '생존 기술', '포식'];
@@ -35,7 +35,7 @@ function set_tree() {
             break;
         case character[1]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[1] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[1] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[1] + skill_tree[i];
             }
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
@@ -43,7 +43,7 @@ function set_tree() {
             break;
         case character[2]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[2] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[2] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[2] + skill_tree[i];
             }
             skill_name = ["트리플 스탭", "깊이 찌르기", "준비 만전", "사우전드 드롭스", "전진 찌르기", "정면돌파", "투창", "아크로바틱", "회전 방어", "발경", "약점 강타", "혼신의 일격"];
@@ -51,7 +51,7 @@ function set_tree() {
             break;
         case character[3]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[3] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[3] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[3] + skill_tree[i];
             }
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
@@ -59,7 +59,7 @@ function set_tree() {
             break;
         case character[4]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[4] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[4] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[4] + skill_tree[i];
             }
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
@@ -67,7 +67,7 @@ function set_tree() {
             break;
         case character[5]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[5] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[5] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[5] + skill_tree[i];
             }
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
@@ -75,7 +75,7 @@ function set_tree() {
             break;
         case character[6]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[6] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[6] + "/" + skill_tree[i] + ".png";
                 document.querySelectorAll('#skill_icons img')[i].id = character[6] + skill_tree[i];
             }
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
