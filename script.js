@@ -15,7 +15,7 @@ function set_tree() {
     switch (present_char){
         case character[0]:
             for (let i = 0; i < 12; i++){
-                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[0] + skill_tree[i] + ".png";
+                document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[0] + skill_tree[i] + ".jpg";
                 document.querySelectorAll('#skill_icons img')[i].id = character[0] + skill_tree[i];
             }
             skill_name = ["횡베기", '타오르는 투지', '약점 노리기', '가드 브레이크', '카운터 디펜스', '침착한 대응', '전력 방어', '데들리 스트라이크', '전투 회복', '악식', '생존 기술', '포식'];
