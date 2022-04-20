@@ -48,7 +48,7 @@ li{
 }
 
     #skill_icons img{ 
-        width: calc(25% - 2px);
+        width: calc(25% - 8px);
         height: 15%;
         margin: auto;
         line-height: 2.5rem;
