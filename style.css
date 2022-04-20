@@ -48,8 +48,8 @@ li{
 }
 
     #skill_icons img{ 
-        width: 25%;
-        height: 30%;
+        width: calc(25% - 2px);
+        height: 15%;
         margin: auto;
         line-height: 2.5rem;
     }
@@ -72,8 +72,18 @@ li{
         margin: auto;
     }
 
-    #skill_description span{
+    #skill_description p{
         width: 100%;
         height: 75%;
         margin: auto;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-content: flex-start;
+        line-height: 2.5rem;
+    }
+
+    #skill_description p span{
+        width: 40%;
+        height: 20%;
     }
