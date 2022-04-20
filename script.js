@@ -124,7 +124,7 @@ function choose_char(input){
 }
 
 function skill_desc(input){
-    document.querySelector("#"+present_char+skill_tree[input]).style.border = "1px solid yellow";
+    document.querySelector("#"+present_char+skill_tree[input]).style.border = "4px solid yellow";
     for (let x of document.querySelectorAll("#skill_icons img:not(#"+present_char+skill_tree[input]+")")) {
         x.style.border = "none";
     }
