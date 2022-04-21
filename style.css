@@ -1,89 +1,204 @@
 @charset "utf-8";
 
+
+
 *{
+
     text-align: center;
+
 }
+
+
 
 body{
+
     display: flex;
+
     flex-flow: row wrap;
+
     justify-content: center;
+
     background: lightgrey;
+
 }
 
-#wrap{
-    width: 60rem;
+#effects{
     display: flex;
     flex-flow: row wrap;
-    background: aliceblue;
+    width: 100%;
+    height: 10rem;
+    justify-content: space-evenly;
+    align-content: space-evenly;
 }
+
+    #effects p{
+        width: 18%;
+        height: 40%;
+        margin: auto;
+        display: flex;
+        flex-flow: row wrap;
+    }
+    
+        #effects p input{
+            width: 100%;
+            height: 40%;
+            margin: auto;
+        }
+    
+    #effects button{
+        width: 13%;
+        height: 40%;
+        margin: auto;
+    }
+
+
+
+#wrap{
+
+    width: 60rem;
+
+    display: flex;
+
+    flex-flow: row wrap;
+
+    background: aliceblue;
+
+}
+
+
+
+
 
 
 
 li{
+
     list-style: none;
+
 }
+
+
 
 #characters {
+
     width: 100%;
+
     height: 5rem;
+
     display: flex;
+
     flex-flow: row wrap;
+
 }
+
+
 
     #characters li{
+
         width: 14%;
+
         height: 80%;
+
         margin: auto;
+
         line-height: 2.5rem;
+
     }
+
+
 
 #skill_icons{
+
     width: 35%;
+
     height: 25rem;
+
     margin: auto;
+
     display: flex;
+
     flex-flow: row wrap;
+
     justify-content: space-evenly;
+
 }
+
+
 
     #skill_icons img{ 
+
         width: calc(25% - 8px);
-        height: 15%;
-        margin: auto;
+
+        height: 15%; 
         line-height: 2.5rem;
+
     }
+
+
 
     .hide {
+
         visibility: hidden;
+
     }
+
+
 
 #skill_description{
+
     width: 55%;
+
     height: 25rem;
+
     margin: auto;
+
     display: flex;
+
     flex-flow: row wrap;
+
 }
 
+
+
     #skill_description h2{
+
         width: 100%;
+
         height: 20%;
+
         margin: auto;
+
     }
+
+
 
     #skill_description p{
+
         width: 100%;
+
         height: 75%;
+
         margin: auto;
+
         display: flex;
+
         flex-flow: row wrap;
+
         justify-content: space-evenly;
+
         align-content: flex-start;
+
         line-height: 2.5rem;
+
     }
 
+
+
     #skill_description p span{
+
         width: 40%;
+
         height: 20%;
+
     }
+
