@@ -14,10 +14,10 @@ let skill_fig2 = new Array (12);
 let skill_fig3 = new Array (12);
 
 // 스킬 데미지에 영향 미치는 효과들
-let attack_power = 6;
+let attack_power = 0;
 let added_damageY = 0;
 let added_damageN = 0;
-let added_damage_once = 9;
+let added_damage_once = 0;
 let added_damageE = 0;
 let upgrade = 0;
 let ad_upgrade = 0;
@@ -28,13 +28,22 @@ let added_damage_debuff = 0;
 let reduce_damage = 0;
 
 function set_figure(){
-        let attack_power = document.getElementById("attack_power").value;
-        
-        /*added_damageY = document.querySelector("#added_damageY").value;
-        added_damageN = document.querySelector("#added_damageN").value;
-        added_damage_once = document.querySelector("#added_damage_once").value;
-        added_damageE = document.querySelector("#added_damageE").value;
-        */
+        attack_power = parseInt(document.getElementById("attack_power").value);
+        added_damageY = parseInt(document.querySelector("#added_damageY").value);
+        added_damageN = parseInt(document.querySelector("#added_damageN").value);
+        added_damage_once = parseInt(document.querySelector("#added_damage_once").value);
+        added_damageE = parseInt(document.querySelector("#added_damageE").value);
+
+        for (let i = 0; i < 12; i++){
+            if (skill_fig1[i] != ''){
+                skill_fig1[i] = (skill_fig1[i]+ added_damageY + added_damageN + added_damage_once + added_damageE ) * ( 1 + attack_power * 0.1 + upgrade *0.25 + ad_upgrade * 0.5 + critical * 0.5 + relic_crit * 0.5 + added_damage_relic * 0.2 + added_damage_debuff * 0.33 - reduce_damage * 0.34 )
+                skill_fig1[i] = Math.floor(skill_fig1[i]);
+            }
+            if (skill_fig2[i] != ''){
+                skill_fig2[i] = (skill_fig2[i]+added_damageY+added_damageN+added_damage_once+added_damageE) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+added_damage_relic*0.2+added_damage_debuff*0.33-reduce_damage*0.34)
+                skill_fig2[i] = Math.floor(skill_fig2[i]);
+            }
+        }
 }
 /*
 
@@ -62,24 +71,18 @@ function set_tree() {
 
             }
             
-            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12]
-            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16]
-            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '']
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12]  //최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16] //최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', ''] //방어도
+            skill_fig4 = ['', '' ,'', '', '', 10, '', '', '', '', '', '']
+
             set_figure();
-            for (let i = 0; i < 12; i++){
-                if (skill_fig1[i] != ''){
-                    skill_fig1[i] = (skill_fig1[i]+added_damageY+added_damageN+added_damage_once+added_damageE) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+added_damage_relic*0.2+added_damage_debuff*0.33-reduce_damage*0.34)
-                }
-                if (skill_fig2[i] != ''){
-                    skill_fig2[i] = (skill_fig2[i]+added_damageY+added_damageN+added_damage_once+added_damageE) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+added_damage_relic*0.2+added_damage_debuff*0.33-reduce_damage*0.34)
-                }
-            }
 
             skill_name = ["횡베기", '타오르는 투지', '약점 노리기', '가드 브레이크', '카운터 디펜스', '침착한 대응', '전력 방어', '데들리 스트라이크', '전투 회복', '악식', '생존 기술', '포식'];
 
             skill_description = [
 
-                "<span>공격 타입: 광역</span> <span>행동력: 1</span> <br> 적 전체에게 "+ skill_fig1[0] +"~"+ skill_fig2[0] +"의 피해를 줍니다.", 
+                `<span>공격 타입: 광역</span> <span>행동력: 1</span> <br> 적 전체에게  ${skill_fig1[0]} ~ ${skill_fig2[0]} 의 피해를 줍니다.`, 
 
                 "<span>공격 타입: 패시브</span> <span>행동력: 패시브</span> <br> 적을 처치하면 1의 행동력을 얻습니다.", 
 
@@ -305,6 +308,8 @@ function on_off(input){
     if (document.querySelector("#"+input).style.backgroundColor == "lightblue") {
          document.querySelector("#"+input).style.backgroundColor = "lightgrey";
          document.querySelector("#"+input).value = "off";
+         window[input]() = 1;
+
     } else if (document.querySelector("#"+input).style.backgroundColor != "lightblue"){
         document.querySelector("#"+input).style.backgroundColor = "lightblue";
         document.querySelector("#"+input).value = "on";
