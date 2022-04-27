@@ -18,11 +18,12 @@
 
     <body>
         <div id="effects">
-            <p>공격력: <input value=0 placeholder="0" onchange="set_figure();" id="attack_power"></p>
-            <p>연참: <input value=0 placeholder="0" onchange="set_figure();" id="added_damageY"></p>
-            <p>날카로움: <input value=0 placeholder="0" onchange="set_figure();" id="added_damageN"></p>
-            <p>집중: <input value=0 placeholder="0" onchange="set_figure();" id="added_damage_once"></p>
-            <p>상처: <input value=0 placeholder="0" onchange="set_figure();" id="added_damageE"></p>
+            <p>공격력: <input value=0 placeholder="-5 이상" onchange="set_figure();" id="attack_power"></p>
+            <p>연참: <input value=0 placeholder="0 이상" onchange="set_figure();" id="added_damageY"></p>
+            <p>날카로움: <input value=0 placeholder="0 이상" onchange="set_figure();" id="added_damageN"></p>
+            <p>집중: <input value=0 placeholder="0 이상" onchange="set_figure();" id="added_damage_once"></p>
+            <p>상처: <input value=0 placeholder="0 이상" onchange="set_figure();" id="added_damageE"></p>
+            <p class="distance">거리: <input value=1 placeholder="1 ~ 5" onchange="set_figure();" id="distance"></p>
             <button id="upgrade" onclick="on_off('upgrade')">강화</button>
             <button id="ad_upgrade" onclick="on_off('ad_upgrade')">상급 강화 </button>
             <button id="critical" onclick="on_off('critical')">치명</button>

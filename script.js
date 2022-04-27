@@ -15,7 +15,11 @@ let skill_fig3 = new Array (17);
 // 반격
 let skill_fig4 = new Array (17);
 
-// 스킬 데미지에 영향 미치는 효과들
+let distance_fig1 = [];
+let distance_fig2 = [];
+let defense = [];
+
+// 스킬 데미지 관련 효과
 let attack_power = 0;
 let added_damageY = 0;
 let added_damageN = 0;
@@ -28,6 +32,12 @@ let relic_crit = 0;
 let drill = 0;
 let defenseless = 0;
 let reduce_damage = 0;
+let distance = 1;
+
+// 방어도 관련 효과
+let defense_power = 0;
+let armor = 0;
+let exhausted = 0;
 
 function set_figure(){
         if (attack_power < -5) {
@@ -70,6 +80,19 @@ function set_figure(){
             added_damageE = document.getElementById("added_damageE").value.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+/g,"");
             added_damageE = parseInt(added_damageE.replace(/\:javascript|&#x3A;|&#x6A;|&#x61;|&#x76;|&#x61;|&#x73;|&#x63;|&#x72;|&#x69;|&#x70;|&#x74;/gi, ""));
         }
+        
+        if (distance < 1) {
+            alert("거리는 1보다 작을 수 없습니다.");
+            document.getElementById("distance").value = 1;
+            distance = 1;
+        } else if (distance > 5)  {
+            alert("거리는 5보다 클 수 없습니다.");
+            document.getElementById("distance").value = 5;
+            distance = 5;
+        } else {
+            distance = document.getElementById("distance").value.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+/g,"");
+            distance = parseInt(distance.replace(/\:javascript|&#x3A;|&#x6A;|&#x61;|&#x76;|&#x61;|&#x73;|&#x63;|&#x72;|&#x69;|&#x70;|&#x74;/gi, ""));
+        }
 
         for (let i = 0; i < 17; i++){
             if (skill_fig1[i] != ''){
@@ -80,6 +103,26 @@ function set_figure(){
                 skill_fig2[i] = (skill_fig2[i]+added_damageY+added_damageN+added_damage_once+added_damageE) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+drill*0.2+defenseless*0.33-reduce_damage*0.34)
                 skill_fig2[i] = Math.floor(skill_fig2[i]);
             }
+            if (skill_fig3[i] != ''){
+                skill_fig3[i] = (skill_fig3[i] + armor * 7) * (1 + defense_power * 0.1 - exhausted * 0.34)
+                skill_fig3[i] = Math.floor(skill_fig3[i]);
+            }
+            if (skill_fig4[i] != ''){
+                skill_fig4[i] = (skill_fig4[i]+added_damageY+added_damageN+added_damageE) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+drill*0.2+defenseless*0.33-reduce_damage*0.34)
+                skill_fig4[i] = Math.floor(skill_fig4[i]);
+            }
+            // 투창 최소딜, 최대딜
+            special_dmg1[0] = (6+added_damageY+added_damageN+added_damageE+distance*6) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+drill*0.2+defenseless*0.33-reduce_damage*0.34)
+            special_dmg1[0] = Math.floor(special_dmg1[0]);
+            special_dmg1[1] = (16+added_damageY*6+added_damageN+added_damageE+distance*6) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+drill*0.2+defenseless*0.33-reduce_damage*0.34)
+            special_dmg1[1] = Math.floor(special_dmg1[0]);
+
+            special_dmg2[0] = (8+added_damageY+added_damageN+added_damageE+distance*6) * (1+attack_power*0.1+upgrade*0.25+ad_upgrade*0.5+critical*0.5+relic_crit*0.5+drill*0.2+defenseless*0.33-reduce_damage*0.34)
+            special_dmg2[0] = Math.floor(special_dmg2[0]);
+
+            // 회전방어
+            defense[0] = (8 + armor * 7 + added_damageY) * (1 + defense_power * 0.1 - exhausted * 0.34)
+            defense[0] = Math.floor(defense[0]);
         }
 }
 /*
@@ -97,9 +140,7 @@ skill_desc > 스킬 아이콘을 눌렀을 때 해당 스킬의 설명 나타내
 function set_tree() {
 
     switch (present_char){
-
         case character[0]:
-
             for (let i = 0; i < 17; i++){
                 if (i < 15){
                     document.querySelectorAll('#skill_icons img')[i].src = `icons/${character[0]}/${skill_tree[i]}.jpg`;
@@ -108,18 +149,14 @@ function set_tree() {
                     document.querySelectorAll('#skill_icons img')[i].style.display = "none";
                 }
             }
-            
+
             skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
             skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
             skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
             skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
-
             set_figure();
-
             skill_name = ["횡베기", '타오르는 투지', '약점 노리기', '가드 브레이크', '카운터 디펜스', '침착한 대응', '전력 방어', '데들리 스트라이크', '전투 회복', '악식', '생존 기술', '포식', '공격', '방어', '더블 슬래시', '', ''];
-
             skill_description = [
-
                 `<span>공격 타입: 광역</span> <span>행동력: 1</span> <br> 적 전체에게  ${skill_fig1[0]} ~ ${skill_fig2[0]} 의 피해를 줍니다.`, 
 
                 "<span>공격 타입: 패시브</span> <span>행동력: 패시브</span> <br> 적을 처치하면 1의 행동력을 얻습니다.", 
@@ -151,107 +188,114 @@ function set_tree() {
                 `<span>공격 타입: 단일</span> <span>행동력: 2</span> <br> 단일 적 유닛에게 ${skill_fig1[14]} ~ ${skill_fig2[14]}의 피해를 두 번 입힙니다. 사거리 2.`,
                 '', ''
             ];
-
             break;
-
         case character[1]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[1] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[1] + skill_tree[i];
-
             }
+            
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
-
             // skill_description = [];
-
             break;
-
         case character[2]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[2] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[2] + skill_tree[i];
-
             }
+
+            skill_fig1 = [5, 18, '', 16, 10, '', '', '', '', 12, '', 16, '', '', 10, '', '']  // 최소데미지
+            skill_fig2 = [9, 26, '', 24, 14, '', '', '', '', 18, '', 28, '', '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             skill_name = ["트리플 스탭", "깊이 찌르기", "준비 만전", "사우전드 드롭스", "전진 찌르기", "정면돌파", "투창", "아크로바틱", "회전 방어", "발경", "약점 강타", "혼신의 일격"];
-
-            // skill_description = ["단일 적 대상에게 "+skill_fig1[0]+"~"+skill_fig2[0]+"의 데미지를 3번 입힙니다.",""];
-
+            skill_description = [
+                `<span>공격 타입: 단일 </span> <span>행동력: 2</span> <br> 단일 적 대상에게 ${skill_fig1[0]} ~ ${skill_fig2[0]}의 데미지를 3번 입힙니다. 사거리 2. <br> 더블 슬래시를 대체합니다.`,
+                `<span>공격 타입: 단일 </span> <span>행동력: 2</span> <br> 단일 적 대상에게 ${skill_fig1[1]} ~ ${skill_fig2[1]}의 데미지를 입힙니다. 사거리 2. <br> 선택한 대상 바로 뒤의 적에게도 같은 피해를 입힙니다.`,
+                `<span>공격 타입: 패시브</span> <span>행동력: 패시브</span> <br> 플레이어가 전투 시작 시 3의 연참을 얻습니다.`,
+                `<span>공격 타입: 광역</span> <span>행동력: 4</span> <br> 모든 적 대상에게 ${skill_fig1[3]} ~ ${skill_fig2[3]}의 데미지를 3번 입힙니다. <br> 전투당 1회 사용 가능합니다.`,
+                `<span>공격 타입: 단일</span> <span>행동력: 1</span> <br> 앞으로 한 칸 이동한 뒤, <br> 단일 적 대상에게 ${skill_fig1[4]} ~ ${skill_fig2[4]}의 데미지를 입힙니다. 사거리 2.`,
+                `<span>공격 타입: 패시브</span> <span>행동력: 패시브</span> <br> 플레이어가 전방으로 이동할 시 1의 강화를 얻습니다.`,
+                `<span>공격 타입: 단일</span> <span>행동력: 2</span> <br> 뒤로 한 칸 이동한 뒤, <br> 단일 적 대상에게 ${special_dmg1[0]} ~ ${special_dmg2[0]}의 피해를 입힙니다. 사거리 무제한.`,
+                `<span>공격 타입: 패시브</span> <span>행동력: 패시브</span> <br> 플레이어가 자신의 턴에 이동할 때마다 ${skill_fig3[7]}의 방어도를 얻습니다.`,
+                `<span>공격 타입: 자버프</span> <span>행동력: 1</span> <br> 플레이어가 ${defense[0]}만큼의 방어도를 얻습니다.`,
+                `<span>공격 타입: 단일</span> <span>행동력: 2</span> <br> 단일 적 대상에게 ${skill_fig1[9]} ~ ${skill_fig2[9]}의 데미지를 입히고 후열로 밀어냅니다. <br> 확정적으로 치명타가 발동합니다. 사거리 1.`,
+                `<span>공격 타입: 단일</span> <span>행동력: 3</span> <br> 단일 적 대상에게 ${special_dmg1[1]} ~ ${special_dmg2[1]}의 데미지를 입히고`,
+                `<span>공격 타입:</span> <span>행동력:</span> <br> `,
+                `<span>공격 타입:</span> <span>행동력:</span> <br> `,
+                `<span>공격 타입:</span> <span>행동력:</span> <br> `,
+                `<span>공격 타입:</span> <span>행동력:</span> <br> `
+            ];
             break;
-
         case character[3]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[3] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[3] + skill_tree[i];
-
             }
+            
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
-
             // skill_description = [];
-
             break;
-
         case character[4]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[4] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[4] + skill_tree[i];
-
             }
+            
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
-
             // skill_description = [];
-
             break;
-
         case character[5]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[5] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[5] + skill_tree[i];
-
             }
+            
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
-
             // skill_description = [];
-
             break;
-
         case character[6]:
-
-            for (let i = 0; i < 12; i++){
-
+            for (let i = 0; i < 17; i++){
                 document.querySelectorAll('#skill_icons img')[i].src = "icons/" + character[6] + "/" + skill_tree[i] + ".png";
-
                 document.querySelectorAll('#skill_icons img')[i].id = character[6] + skill_tree[i];
-
             }
+            
+            skill_fig1 = [6, '', 10, '', '', '', '', 48, '', 10, '', 12, 11, '', 10, '', '']  // 최소데미지
+            skill_fig2 = [10, '', 15, '', '', '', '', 56, '', 14, '', 16, 13, '', 16, '', ''] // 최대데미지
+            skill_fig3 = ['', '', '', '', 18, '', 50, '', '', '', '', '', '', 8, '', '', ''] // 방어도
+            skill_fig4 = ['', '' ,'', '', 10, '', '', '', '', '', '', '', '', '', '', '', ''] // 반격뎀
+            set_figure();
 
             // skill_name = ["", "", "", "", "", "", "", "", "", "", "", ""];
-
             // skill_description = [];
-
             break;
-
     }
-
 }
 
 
